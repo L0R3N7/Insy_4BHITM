@@ -1,5 +1,6 @@
 package at.htl.workloads.order;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -8,9 +9,9 @@ public class OrderItemId implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long itemNo;
     @ManyToOne
+    @JsonbTransient
     private Orderr orderr;
     private long Pcode;
-
 
     public OrderItemId() {
     }

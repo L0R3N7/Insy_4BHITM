@@ -3,6 +3,7 @@ package at.htl.workloads.person;
 import at.htl.workloads.hobby.Hobby;
 import at.htl.workloads.order.Orderr;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;

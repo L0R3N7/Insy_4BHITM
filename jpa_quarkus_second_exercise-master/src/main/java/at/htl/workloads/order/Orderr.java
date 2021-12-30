@@ -2,8 +2,11 @@ package at.htl.workloads.order;
 
 import at.htl.models.OrderItemDTO;
 import at.htl.workloads.person.Person;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.criterion.Order;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,8 +21,10 @@ public class Orderr {
     private Long orderNo;
     private LocalDate orderDate;
     @ManyToOne
+    @JsonbTransient
     private Person person;
     @OneToMany(mappedBy = "id.orderr", cascade = CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<OrderItem> orderItemList = new ArrayList<>();
 
     public Orderr() {
