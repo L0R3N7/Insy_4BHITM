@@ -1,3 +1,6 @@
+# Ignore finished and compressed projects
+done/
+
 # Compiled class file
 *.class
 

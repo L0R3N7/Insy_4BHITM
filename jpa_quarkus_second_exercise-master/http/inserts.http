@@ -1,0 +1,21 @@
+###
+POST http://{{host}}/person
+Content-Type: application/json
+
+{
+  "name": "Susi",
+  "sex": "FEMALE",
+  "dob": "2002-02-02",
+  "awesome": true
+}
+
+###
+POST http://{{host}}/person
+Content-Type: application/json
+
+{
+  "name": "Hansi",
+  "sex": "MALE",
+  "dob": "2003-03-03",
+  "awesome": false
+}
