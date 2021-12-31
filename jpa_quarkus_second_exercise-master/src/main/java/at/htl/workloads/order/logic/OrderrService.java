@@ -15,4 +15,6 @@ public interface OrderrService {
     Orderr update(Orderr orderr, List<OrderItemDTO> orderItemDTOList);
 
     boolean deleteOrder(long id);
+
+    List<Object[]> getAllTotalRevenue();
 }

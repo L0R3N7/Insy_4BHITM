@@ -44,4 +44,9 @@ public class OrderrServiceImp implements OrderrService{
     public boolean deleteOrder(long id) {
         return orderrRepo.deleteOrder(id);
     }
+
+    @Override
+    public List<Object[]> getAllTotalRevenue() {
+        return this.orderrRepo.getAllTotalRevenue();
+    }
 }

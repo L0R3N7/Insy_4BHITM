@@ -36,4 +36,12 @@ public class HobbyResource {
         return Response.ok(counts).build();
     }
 
+    @GET
+    @Path("TheMostPopularItemPerHobby")
+    public Response theMostPopularItemPerHobby(){
+        return Response.ok(
+                this.hobbyService.theMostPopularItemPerHobby()
+        ).build();
+    }
+
 }

@@ -11,7 +11,9 @@ import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -85,5 +87,14 @@ public class OrderResource {
         return ((orderr == null)
                 ?(Response.status(404))
                 : (Response.ok(orderr))).build();
+    }
+
+    @GET
+    @Path("AllTotalRevenue")
+    public Response getAllTotalRevenue(){
+
+        return Response.ok(
+                this.orderrService.getAllTotalRevenue()
+        ).build();
     }
 }

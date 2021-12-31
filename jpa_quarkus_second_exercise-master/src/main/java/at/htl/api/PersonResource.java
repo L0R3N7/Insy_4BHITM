@@ -4,6 +4,7 @@ import at.htl.models.InterestDTO;
 import at.htl.models.PersonDTO;
 import at.htl.workloads.hobby.Hobby;
 import at.htl.workloads.hobby.HobbyService;
+import at.htl.workloads.order.Orderr;
 import at.htl.workloads.person.Person;
 import at.htl.workloads.person.PersonService;
 
@@ -66,4 +67,12 @@ public class PersonResource {
                 newPerson.getGender())).build();
     }
 
+    @GET
+    @Path("{person_id}/numberOfOrders")
+    public Response numberOfOrders(
+            @PathParam("person_id") long id
+    ){
+        long count = this.personService.numberOfOrders(id);
+        return Response.ok(count).build();
+    }
 }

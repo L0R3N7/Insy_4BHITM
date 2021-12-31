@@ -1,7 +1,7 @@
 package at.htl.workloads.hobby;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Default;
+import java.util.List;
 import java.util.Map;
 
 @ApplicationScoped
@@ -28,5 +28,10 @@ public class HobbyServiceImpl implements HobbyService {
     @Override
     public Map<String, Long> getHobbyistCount() {
         return this.hobbyRepo.getHobbyistCount();
+    }
+
+    @Override
+    public List<Object[]> theMostPopularItemPerHobby() {
+        return hobbyRepo.theMostPopularItemPerHobby();
     }
 }

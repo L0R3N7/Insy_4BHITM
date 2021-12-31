@@ -1,10 +1,13 @@
 package at.htl.workloads.order.logic;
 
 import at.htl.workloads.order.Orderr;
+import at.htl.workloads.order.RevenueRecord;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class OrderrRepoImp implements OrderrRepo {
@@ -38,5 +41,23 @@ public class OrderrRepoImp implements OrderrRepo {
                 .setParameter("id", id)
                 .executeUpdate();
         return response == 1;
+    }
+
+    @Override
+    public List<Object[]> getAllTotalRevenue() {
+        List<Object[]> result = this.entityManager
+                .createQuery("select new at.htl.workloads.order.RevenueRecord(p.id, concat(p.firstName, concat(' ', p.lastName) ) , sum(oi.PPrice * oi.Amount)) from Person p, OrderItem oi where p = oi.id.orderr.person group by p", RevenueRecord.class)
+                .getResultStream().map(rr->  new Object[]{rr.personId(), rr.name(), rr.revenue()}).collect(Collectors.toList());
+        return result;
+
+        /*ObjectMapper objectMapper = new ObjectMapper();
+
+        TypedQuery<CountTotalRevenue> query = entityManager
+                .createQuery("select NEW at.htl.workloads.query.CountTotalRevenue(p.id, sum(oi.PPrice *  oi.Amount)) from OrderItem oi join oi.id.orderr.person p", CountTotalRevenue.class);
+        CountTotalRevenue countTotalRevenueResult = query.getResultStream().findFirst().orElse(null);
+
+        System.out.println("###############" + countTotalRevenueResult.personId() +"  "+  countTotalRevenueResult.totalPrice());
+
+        return objectMapper.convertValue(countTotalRevenueResult, Map.class);*/
     }
 }

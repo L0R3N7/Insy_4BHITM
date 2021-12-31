@@ -1,6 +1,7 @@
 package at.htl.workloads.person;
 
 import at.htl.workloads.hobby.Hobby;
+import at.htl.workloads.order.Orderr;
 
 import javax.enterprise.context.ApplicationScoped;
 import java.time.LocalDate;
@@ -36,5 +37,10 @@ public class PersonServiceImpl implements PersonService {
         var p = Person.create(firstName, lastName, dateOfBirth, gender);
         this.personRepo.add(p);
         return p;
+    }
+
+    @Override
+    public long numberOfOrders(long id) {
+        return personRepo.numberOfOrders(id);
     }
 }
