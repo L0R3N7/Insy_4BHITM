@@ -69,8 +69,10 @@ public class Orderr {
     public static Orderr createOrderr(Person p, List<NewOrderItem> items){
         Orderr orderr = new Orderr();
 
+        long itemNo = 1;
         for (NewOrderItem newOrderItem : items){
-            orderr.addOrderItem(OrderItem.create(orderr, newOrderItem.pCode(), newOrderItem.pPrice(), newOrderItem.amount()));
+            orderr.addOrderItem(OrderItem.create(orderr, newOrderItem.pCode(), newOrderItem.pPrice(), newOrderItem.amount(), itemNo));
+            itemNo++;
         }
         p.addOrderrs(orderr);
 

@@ -11,10 +11,21 @@ public class OrderItem {
 
     private BigDecimal PPrice;
     private Integer Amount;
+    private long Pcode;
+
+
 
     public OrderItem() {
     }
 
+
+    public long getPcode() {
+        return Pcode;
+    }
+
+    public void setPcode(long pcode) {
+        Pcode = pcode;
+    }
     public OrderItemId getId() {
         return id;
     }
@@ -39,12 +50,12 @@ public class OrderItem {
         Amount = amount;
     }
 
-    public static OrderItem create(Orderr orderr, int pCode, BigDecimal pPrice, int amount){
+    public static OrderItem create(Orderr orderr, long pCode, BigDecimal pPrice, int amount, long itemNo){
         OrderItem orderItem = new OrderItem();
 
         OrderItemId orderItemId = new OrderItemId();
         orderItemId.setOrderr(orderr);
-        orderItemId.setPcode(pCode);
+        orderItemId.setItemNo(itemNo);
 
         orderItem.setId(orderItemId);
         orderItem.setAmount(amount);

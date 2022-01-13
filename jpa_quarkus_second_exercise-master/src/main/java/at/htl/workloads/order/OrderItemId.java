@@ -6,22 +6,12 @@ import java.io.Serializable;
 
 @Embeddable
 public class OrderItemId implements Serializable {
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long itemNo;
     @ManyToOne
     @JsonbTransient
     private Orderr orderr;
-    private long Pcode;
 
     public OrderItemId() {
-    }
-
-    public long getPcode() {
-        return Pcode;
-    }
-
-    public void setPcode(long pcode) {
-        Pcode = pcode;
     }
 
     public Orderr getOrderr() {

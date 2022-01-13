@@ -31,11 +31,13 @@ public class OrderrServiceImp implements OrderrService{
 
     @Override
     public Orderr update(Orderr orderr, List<OrderItemDTO> orderItemDTOList) {
-        orderItemDTOList.forEach(
-                orderItemDTO -> {
-                    orderr.addOrderItem(OrderItem.create(orderr, orderItemDTO.getpCode(), orderItemDTO.getpPrice(), orderItemDTO.getAmount()));
-                }
-        );
+
+        long maxOrderItemNo = orderr.getOrderItemList().stream().mapToLong(o -> o.getId().getItemNo()).max().orElse(0)+1;
+
+        for (OrderItemDTO orderItemDTO : orderItemDTOList){
+            orderr.addOrderItem(OrderItem.create(orderr, orderItemDTO.getpCode(), orderItemDTO.getpPrice(), orderItemDTO.getAmount(), maxOrderItemNo));
+            maxOrderItemNo++;
+        }
         orderrRepo.update(orderr);
         return orderr;
     }
