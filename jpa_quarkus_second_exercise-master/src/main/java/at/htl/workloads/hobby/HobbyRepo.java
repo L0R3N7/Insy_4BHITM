@@ -1,5 +1,7 @@
 package at.htl.workloads.hobby;
 
+import at.htl.result.ItemHobby;
+
 import java.util.List;
 import java.util.Map;
 
@@ -8,5 +10,5 @@ public interface HobbyRepo {
     Hobby getHobby(Long hobbyId);
     Map<String, Long> getHobbyistCount();
 
-    List<Object[]> theMostPopularItemPerHobby();
+    List<ItemHobby> theMostPopularItemPerHobby();
 }

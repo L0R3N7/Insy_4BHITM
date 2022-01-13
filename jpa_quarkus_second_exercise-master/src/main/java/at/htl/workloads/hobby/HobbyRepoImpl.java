@@ -1,5 +1,7 @@
 package at.htl.workloads.hobby;
 
+import at.htl.result.ItemHobby;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -46,7 +48,7 @@ public class HobbyRepoImpl implements HobbyRepo {
     }
 
     @Override
-    public List<Object[]> theMostPopularItemPerHobby() {
+    public List<ItemHobby> theMostPopularItemPerHobby() {
 
         TypedQuery<Long> queryHobbyId = this.entityManager
                 .createQuery("SELECT h.id from Hobby h group by h", Long.class);
@@ -56,19 +58,19 @@ public class HobbyRepoImpl implements HobbyRepo {
             return null;
         }
 
-        List<HobbyItemRecord> hobbyItemRecordList = new ArrayList<>();
+        List<ItemHobby> hobbyItemRecordList = new ArrayList<>();
 
         for(long id : hobbyIds){
             Long popularProductId = this.entityManager
-                    .createQuery("select oi.id.itemNo from OrderItem oi, Interest i where i.id.hobby.id = :id and oi.id.orderr.person = i.id.person group by oi.id.itemNo order by count(oi.id.itemNo) desc ", Long.class)
+                    .createQuery("select oi.Pcode from OrderItem oi, Interest i where i.id.hobby.id = :id and oi.id.orderr.person = i.id.person group by oi.Pcode order by count(oi.Pcode) desc ", Long.class)
                     .setParameter("id", id)
                     .setMaxResults(1)
                     .getResultStream().findFirst().orElse(null);
             if (popularProductId != null){
-                hobbyItemRecordList.add(new HobbyItemRecord(id, popularProductId));
+                hobbyItemRecordList.add(new ItemHobby(popularProductId,id));
             }
         }
 
-        return hobbyItemRecordList.stream().map(hi->  new Object[]{hi.hobbyId(), hi.itemNo()}).collect(Collectors.toList());
+        return hobbyItemRecordList;
     }
 }

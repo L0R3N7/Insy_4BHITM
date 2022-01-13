@@ -8,6 +8,7 @@ import at.htl.results.PlayerPenalties;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
@@ -29,7 +30,10 @@ public class Repository {
      * @param town name of the town
      */
     public List<Player> getPlayersLivingInTown(String town) {
-        return null;
+        TypedQuery<Player> playerTypedQuery =  entityManager
+                .createQuery("select p from Player p where p.town = :town", Player.class)
+                .setParameter("town", town);
+        return playerTypedQuery.getResultStream().collect(Collectors.toList());
     }
 
     /**
@@ -38,7 +42,10 @@ public class Repository {
      * @param towns names of towns
      */
     public List<Player> getPlayersLivingInTowns(List<String> towns) {
-        return null;
+        TypedQuery<Player> playerTypedQuery =  entityManager
+                .createQuery("select p from Player p where p.town in :town", Player.class)
+                .setParameter("town", towns);
+        return playerTypedQuery.getResultStream().collect(Collectors.toList());
     }
 
     /**
@@ -48,7 +55,13 @@ public class Repository {
      * @param bornBeforeYear the exclusive year before someone has to be born
      */
     public List<Player> getPlayersWithGenderAndAge(boolean female, int bornBeforeYear) {
-        return null;
+        Character sex = (female)?('F'):('M');
+
+        TypedQuery<Player> playerTypedQuery =  entityManager
+                .createQuery("select p from Player p where p.yearOfBirth < :bornBeforeYear and p.sex = :sex", Player.class)
+                .setParameter("bornBeforeYear", bornBeforeYear)
+                .setParameter("sex", sex);
+        return playerTypedQuery.getResultStream().collect(Collectors.toList());
     }
 
     /**
@@ -58,28 +71,44 @@ public class Repository {
      * @param end   the second (later) date, inclusive
      */
     public List<Penalty> getPenaltiesInDateRange(LocalDate start, LocalDate end) {
-        return null;
+        TypedQuery<Penalty> penaltyTypedQuery = entityManager
+                .createQuery("select p from Penalty p where p.penDate between :start and :end", Penalty.class)
+                .setParameter("start", start)
+                .setParameter("end", end);
+
+        return penaltyTypedQuery.getResultList();
     }
 
     /**
      * Returns penalties with an amount higher or equal to the specified amount
      */
     public List<Penalty> getPenaltiesWithAmountHigherEqualThan(BigDecimal amount) {
-        return null;
+        TypedQuery<Penalty> penaltyTypedQuery = entityManager
+                .createQuery("select p from Penalty p where p.amount >= :amount", Penalty.class)
+                .setParameter("amount", amount);
+
+        return penaltyTypedQuery.getResultList();
     }
 
     /**
      * Returns the average penalty sum calculated over all penalties
      */
     public Double getAveragePenaltyAmount() {
-        return null;
+        TypedQuery<Double> penaltyTypedQuery = entityManager
+                .createQuery("select avg(p.amount) from Penalty p ", Double.class);
+
+        return penaltyTypedQuery.getSingleResult();
     }
 
     /**
      * Returns the min & max penalty amount
      */
     public MinMaxAmount getMinMaxPenaltyAmount() {
-        return null;
+        TypedQuery<MinMaxAmount> typedQuery = entityManager
+                .createQuery("select new at.htl.results.MinMaxAmount(min(p.amount), max(p.amount)) from Penalty p",
+                        MinMaxAmount.class);
+
+        return typedQuery.getSingleResult();
     }
 
     /**
@@ -88,7 +117,12 @@ public class Repository {
      * @param hasPenalty flag indicating if we want to look for players with or without penalties
      */
     public List<Player> getPlayersWithPenalties(boolean hasPenalty) {
-        return null;
+
+        String notOrNot = (!hasPenalty)?"":"not";
+
+        TypedQuery<Player> playerTypedQuery =  entityManager
+                .createQuery("select p from Player p where p.penalties is " + notOrNot + " EMPTY", Player.class);
+        return playerTypedQuery.getResultStream().collect(Collectors.toList());
     }
 
     /**
@@ -97,14 +131,20 @@ public class Repository {
      * @param minNoOfPlayers the min. number of players a town has to have
      */
     public List<String> getTownsWithPlayerNumber(Long minNoOfPlayers) {
-        return null;
+        TypedQuery<String> playerTypedQuery =  entityManager
+                .createQuery("select p.town from Player p group by p.town having count(p) >= :minNoOfPlayers ", String.class)
+                .setParameter("minNoOfPlayers", minNoOfPlayers);
+        return playerTypedQuery.getResultStream().collect(Collectors.toList());
     }
 
     /**
      * Returns the number of players for each gender
      */
     public Map<Character, Long> getPlayerCountsByGender() {
-        return null;
+        TypedQuery<GenderCount> typedQuery =
+                entityManager.createQuery("select new at.htl.results.GenderCount(p.sex, count(p)) from Player p group by p.sex", GenderCount.class);
+
+        return typedQuery.
     }
 
     /**
