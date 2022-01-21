@@ -144,13 +144,17 @@ public class Repository {
         TypedQuery<GenderCount> typedQuery =
                 entityManager.createQuery("select new at.htl.results.GenderCount(p.sex, count(p)) from Player p group by p.sex", GenderCount.class);
 
-        return typedQuery.
+        return typedQuery
+                .getResultStream().collect(Collectors.toMap(GenderCount::gender, GenderCount::count));
     }
 
     /**
      * Returns the penalty sum for all players, including those who never received a penalty (sum = 0)
      */
     public List<PlayerPenalties> getPenaltiesForAllPlayers() {
-        return null;
+        var query = this.entityManager
+                .createQuery("select new at.htl.results.PlayerPenalties(p, sum(coalesce(pe.amount, 0))) from Player p left join p.penalties pe group by p", PlayerPenalties.class);
+        List<PlayerPenalties> result = query.getResultList();
+        return result;
     }
 }
