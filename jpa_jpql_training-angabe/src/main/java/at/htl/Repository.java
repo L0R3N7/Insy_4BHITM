@@ -33,7 +33,7 @@ public class Repository {
         TypedQuery<Player> playerTypedQuery =  entityManager
                 .createQuery("select p from Player p where p.town = :town", Player.class)
                 .setParameter("town", town);
-        return playerTypedQuery.getResultStream().collect(Collectors.toList());
+        return playerTypedQuery.getResultList();
     }
 
     /**
@@ -45,7 +45,7 @@ public class Repository {
         TypedQuery<Player> playerTypedQuery =  entityManager
                 .createQuery("select p from Player p where p.town in :town", Player.class)
                 .setParameter("town", towns);
-        return playerTypedQuery.getResultStream().collect(Collectors.toList());
+        return playerTypedQuery.getResultList();
     }
 
     /**
@@ -61,7 +61,7 @@ public class Repository {
                 .createQuery("select p from Player p where p.yearOfBirth < :bornBeforeYear and p.sex = :sex", Player.class)
                 .setParameter("bornBeforeYear", bornBeforeYear)
                 .setParameter("sex", sex);
-        return playerTypedQuery.getResultStream().collect(Collectors.toList());
+        return playerTypedQuery.getResultList();
     }
 
     /**
@@ -122,7 +122,7 @@ public class Repository {
 
         TypedQuery<Player> playerTypedQuery =  entityManager
                 .createQuery("select p from Player p where p.penalties is " + notOrNot + " EMPTY", Player.class);
-        return playerTypedQuery.getResultStream().collect(Collectors.toList());
+        return playerTypedQuery.getResultList();
     }
 
     /**
@@ -134,7 +134,7 @@ public class Repository {
         TypedQuery<String> playerTypedQuery =  entityManager
                 .createQuery("select p.town from Player p group by p.town having count(p) >= :minNoOfPlayers ", String.class)
                 .setParameter("minNoOfPlayers", minNoOfPlayers);
-        return playerTypedQuery.getResultStream().collect(Collectors.toList());
+        return playerTypedQuery.getResultList();
     }
 
     /**
