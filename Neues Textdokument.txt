@@ -1,0 +1,28 @@
+@inheritance
+@DiscrminatorColumn
+abstract extends
+
+
+public enum name{
+}
+
+@Enumerated(enumtype.string)
+
+applicationscoped
+
+left join
+stream.map collect.tompa
+
+lombok
+mapstruct
+
+@Mapper
+public interface UserBodyValuesMapper {
+    UserBodyValuesMapper INSTANCE = Mappers.getMapper(UserBodyValuesMapper.class);
+
+    @Mapping(source = "pound", target = "kilogram", qualifiedBy = PoundToKilogramMapper.class)
+    public UserBodyValues userBodyValuesMapper(UserBodyImperialValuesDTO dto);
+
+
+Double(variable as! String
+)

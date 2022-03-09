@@ -6,4 +6,8 @@ import java.util.List;
 
 public interface VendingMachineService {
     List<VendingMachine> getAll();
+
+    VendingMachine getById(long id);
+
+    void delete(VendingMachine vendingMachine);
 }

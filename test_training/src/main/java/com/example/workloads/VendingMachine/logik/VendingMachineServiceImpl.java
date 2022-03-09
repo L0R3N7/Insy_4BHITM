@@ -18,4 +18,14 @@ public class VendingMachineServiceImpl implements VendingMachineService {
     public List<VendingMachine> getAll() {
         return this.vendingMachineRepo.getAll();
     }
+
+    @Override
+    public VendingMachine getById(long id) {
+        return this.vendingMachineRepo.getById(id);
+    }
+
+    @Override
+    public void delete(VendingMachine vendingMachine) {
+        this.vendingMachineRepo.delete(vendingMachine);
+    }
 }

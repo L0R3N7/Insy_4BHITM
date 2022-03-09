@@ -34,4 +34,14 @@ public class VendingMachineRepoImpl implements VendingMachineRepo {
 
         return null;
     }
+
+    @Override
+    public VendingMachine getById(long id) {
+        return this.entityManager.createQuery("select v from VendingMachine v where v.id = :id", VendingMachine.class).setParameter("id", id).getSingleResult());
+    }
+
+    @Override
+    public void delete(VendingMachine vendingMachine) {
+        this.entityManager.remove(vendingMachine);
+    }
 }

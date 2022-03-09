@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
-public class InterestId implements Serializable {
+public class  InterestId implements Serializable {
 
     @JsonbTransient //Ausgabe bei der RestApi, keine Rekursion
     @ManyToOne
