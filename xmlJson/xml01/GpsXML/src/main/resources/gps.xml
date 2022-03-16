@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <RouteList>
-    <Route name="HTL - Leonding | Bim">
+    <Route avg_duration="1.3" name="HTL - Leonding | Bim" total_distant="6.2">
         <GPSList>
             <GPS latitude="14.276915" longitude="48.2959791" order="1"/>
             <GPS latitude="15.276915" longitude="1.0" order="2"/>
@@ -12,6 +12,8 @@
             <GPS latitude="0.6028545773375316" longitude="7.116747441241981" order="8"/>
             <GPS latitude="5.442864532198058" longitude="5.817587094924938" order="9"/>
             <GPS latitude="3.2676941893745894" longitude="6.649928058501987" order="10"/>
+            <GPS latitude="2.3122563743248925" longitude="1.9254650802872575" order="11"/>
+            <GPS latitude="4.233661134348954" longitude="8.468559183027246" order="12"/>
         </GPSList>
     </Route>
 </RouteList>

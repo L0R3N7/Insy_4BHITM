@@ -11,6 +11,8 @@
             <GPS latitude="4.729187183235003" longitude="5.848550359652504" order="7"/>
             <GPS latitude="0.6028545773375316" longitude="7.116747441241981" order="8"/>
             <GPS latitude="5.442864532198058" longitude="5.817587094924938" order="9"/>
+            <GPS latitude="3.2676941893745894" longitude="6.649928058501987" order="10"/>
+            <GPS latitude="2.3122563743248925" longitude="1.9254650802872575" order="11"/>
         </GPSList>
     </Route>
 </RouteList>
