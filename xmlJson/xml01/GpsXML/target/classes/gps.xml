@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<RouteList>
+    <Route name="HTL - Leonding | Bim">
+        <GPSList>
+            <GPS latitude="14.276915" longitude="48.2959791" order="1"/>
+            <GPS latitude="15.276915" longitude="1.0" order="2"/>
+            <GPS latitude="7.987347027934764" longitude="0.4384393670855036" order="3"/>
+            <GPS latitude="1.1650065127377807" longitude="6.524245584174412" order="4"/>
+            <GPS latitude="7.138650476913243" longitude="8.479411477876381" order="5"/>
+            <GPS latitude="8.458855868426104" longitude="8.94519844463139" order="6"/>
+            <GPS latitude="4.729187183235003" longitude="5.848550359652504" order="7"/>
+            <GPS latitude="0.6028545773375316" longitude="7.116747441241981" order="8"/>
+            <GPS latitude="5.442864532198058" longitude="5.817587094924938" order="9"/>
+        </GPSList>
+    </Route>
+</RouteList>

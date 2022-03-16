@@ -1,0 +1,30 @@
+import model.GPS;
+import model.RouteList;
+
+import java.util.Comparator;
+
+public class Main {
+    public static void main(String[] args) {
+        XMLParser xmlParser = new XMLParser();
+
+        RouteList routeList;
+
+
+        // Start Program
+        // read in XML
+        routeList = xmlParser.unmarshall();
+
+        if (routeList==null){
+            System.err.println("File could not be read");
+        }
+
+        //Change routeList
+        int max = routeList.getRoute().get(routeList.getRoute().size()-1).getGpsList().getGps().stream().max(Comparator.comparingInt(GPS::getOrder)).orElse(new GPS(0D, 0D, 0)).getOrder();
+        routeList.getRoute().get(routeList.getRoute().size()-1).getGpsList().addGps(new GPS(Math.random()*10, Math.random()*10, max+1));
+
+
+        // Saving routList to file
+        xmlParser.marshall(routeList);
+    }
+
+}
