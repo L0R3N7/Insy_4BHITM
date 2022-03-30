@@ -1,0 +1,77 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "at.htl";
+option java_outer_classname = "TrackProto";
+
+package track;
+
+service Track {
+  rpc GetTrackIds(GetTrackIdsRequest) returns (GetTrackIdsReply);
+  rpc GetTrackInfo(GetTrackInfoRequest) returns (GetTrackInfoReply);
+  rpc AddTrackLog(AddTrackLogRequest) returns (AddTrackLogReply) ;
+  rpc GetUsers(GetUsersRequest) returns (GetUsersReply);
+  rpc GetTrackInfoByTrack(GetTrackInfoByTrackRequest) returns (GetTrackInfoByTrackReply);
+}
+message GetTrackInfoByTrackRequest{
+  int32 trackId = 1;
+}
+
+message GetTrackInfoByTrackReply{
+  repeated TrackLog tracklog = 1;
+}
+
+message TrackLog{
+  User user = 1;
+  int64 timestamp = 2;
+  int32 durationSeconds = 3;
+}
+
+message User{
+  int32 userId = 1;
+  string firstName = 2;
+  string lastName = 3;
+  int64 dateOfBirth = 4;
+  bool female = 5;
+}
+
+message GetUsersRequest{}
+message GetUsersReply{
+  repeated User user = 1;
+}
+
+message AddTrackLogRequest {
+  int32 trackId = 1;
+  int32 userId = 2;
+  int32 durationSeconds = 3;
+}
+
+message AddTrackLogReply {
+  bool success = 1;
+}
+
+message GetTrackIdsRequest {}
+
+message GetTrackIdsReply {
+  repeated int32 id = 1;
+}
+
+message GetTrackInfoRequest {
+  int32 id = 1;
+}
+message GetTrackInfoReply {
+  message Coordinate {
+    double longitude = 1;
+    double latitude = 2;
+  }
+  enum Rating {
+    Easy = 0;
+    Intermediate = 1;
+    Difficult = 2;
+  }
+  int32 id = 1;
+  string name = 2;
+  Rating rating = 3;
+  repeated Coordinate coordinate = 4;
+}
+
